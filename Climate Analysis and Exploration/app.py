@@ -83,7 +83,7 @@ def start_date(start):
         filter(Measurement.date >= start).\
         group_by(Measurement.date).all()
 
-        return jsonify(temperatures)
+    return jsonify(temperatures)
 
 session.close()
 
@@ -94,7 +94,7 @@ def start_end_date(start,end):
         filter(Measurement.date >= start).filter(Measurement.date <= end)\
         group_by(Measurement.date).all()
 
-        jsonify(start_end_date)
+    return jsonify(start_end_date)
 
 session.close()
 
