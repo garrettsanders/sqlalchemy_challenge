@@ -78,5 +78,28 @@ session.close()
 
 @app.route("/api/v1.0/<start>")
 def start_date(start):
-    
+    temperatures = session.query(func.min(Measurement.tobs),\
+         session.query(func.max(Measurement.tobs), session.query(func.avg(Measurement.tobs)).\
+        filter(Measurement.date >= start).\
+        group_by(Measurement.date).all()
+
+        return jsonify(temperatures)
+
+session.close()
+
+@app.route("/api/v1.0/<start>/<end>")
+def start_end_date(start,end):
+    start_end = session.query(func.min(Measurement.tobs),\
+         session.query(func.max(Measurement.tobs), session.query(func.avg(Measurement.tobs)).\
+        filter(Measurement.date >= start).filter(Measurement.date <= end)\
+        group_by(Measurement.date).all()
+
+        jsonify(start_end_date)
+
+session.close()
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
 
